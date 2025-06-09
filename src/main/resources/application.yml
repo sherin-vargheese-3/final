@@ -15,28 +15,12 @@ spring:
         properties:
             hibernate:
                 dialect: org.hibernate.dialect.PostgreSQLDialect
-                
+    
     data:
         redis:
             host: redis
             port: 6379
-    
-    kafka:
-        bootstrap-servers: kafka:9092
-        consumer:
-            group-id: message_group
-            auto-offset-reset: earliest
-            key-deserializer: org.apache.kafka.common.serialization.StringDeserializer
-            value-deserializer: org.apache.kafka.common.serialization.StringDeserializer
-        producer:
-            key-serializer: org.apache.kafka.common.serialization.StringSerializer
-            value-serializer: org.apache.kafka.common.serialization.StringSerializer
-        listener:
-            ack-mode: record
-            missing-topics-fatal: false
-            concurrency: 1
-            type: single
-        
+
 kafka:
     topic:
         name: message-topic
