@@ -1,3 +1,4 @@
+version: '3.8'
 services:
     
     zookeeper:
@@ -19,8 +20,6 @@ services:
             KAFKA_BROKER_ID: 1
             KAFKA_CFG_ZOOKEEPER_CONNECT: zookeeper:2181
             KAFKA_CFG_LISTENERS: PLAINTEXT://:9092
-            
-            # change to PLAINTEXT://localhost:9092 to run on intellij, PLAINTEXT://kafka:9092 to run on docker
             KAFKA_CFG_ADVERTISED_LISTENERS: PLAINTEXT://localhost:9092
             ALLOW_PLAINTEXT_LISTENER: "yes"
         depends_on:
@@ -50,27 +49,6 @@ services:
         networks:
             - app-network
         command: [ "redis-server", "--save", "", "--appendonly", "no" ]
-    
-    # comment this to run on intellij
-    app:
-        build: .
-        container_name: springboot-app
-        ports:
-            - "8080:8080"
-        depends_on:
-            - kafka
-            - postgres
-            - redis
-        networks:
-            - app-network
-        environment:
-            SPRING_DATASOURCE_URL: jdbc:postgresql://postgresql:5432/finaldb
-            SPRING_DATASOURCE_USERNAME: admin
-            SPRING_DATASOURCE_PASSWORD: admin
-            SPRING_REDIS_HOST: redis
-            SPRING_REDIS_PORT: 6379
-            SPRING_KAFKA_BOOTSTRAP_SERVERS: kafka:9092
-            SPRING_PROFILES_ACTIVE: docker
 
 networks:
     app-network:
