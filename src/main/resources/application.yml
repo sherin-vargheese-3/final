@@ -20,6 +20,10 @@ spring:
         redis:
             host: redis
             port: 6379
+    
+    kafka:
+        # change to localhost:9092 to run on intellij, kafka:9092 to run on docker
+        bootstrap-servers: localhost:9092
 
 kafka:
     topic:
