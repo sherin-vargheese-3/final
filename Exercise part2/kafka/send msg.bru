@@ -1,0 +1,17 @@
+meta {
+  name: send msg
+  type: http
+  seq: 1
+}
+
+post {
+  url: http://localhost:8080/api/messages
+  body: json
+  auth: inherit
+}
+
+body:json {
+  {
+    "content": "this is a test msg"
+  }
+}
